@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddScoped<UserSeeder>();
 builder.Services.AddScoped<IRetailPropertyService, RetailPropertyService>();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {

@@ -22,12 +22,13 @@ namespace SmartCity.Infrastructure
         {
             var retailProperty = await _context.Properties.FirstOrDefaultAsync(x => x.Id == id);
             _context.Properties.Remove(retailProperty);
+            await _context.SaveChangesAsync();
             return retailProperty != null;
         }
 
-        public async Task<IEnumerable<RetailProperty>> GetProperties()
+        public async Task<IEnumerable<RetailProperty>> GetPropertiesAsync()
         {
-            return await _context.Properties.ToListAsync();
+            return await _context.Properties.AsNoTracking().ToListAsync();
         }
 
         public async Task<RetailProperty> UpdateProperty(RetailProperty property)
