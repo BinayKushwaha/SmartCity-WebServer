@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SmartCity.Application;
 using SmartCity.Domain;
@@ -15,6 +16,7 @@ builder.Services.AddScoped<UserSeeder>();
 builder.Services.AddScoped<IRetailPropertyService, RetailPropertyService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ICacheService, CacheService>();
+builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -49,9 +51,26 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<TokenService>();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState
+            .Where(e => e.Value!.Errors.Count > 0)
+            .ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
 
-builder.Services.AddControllers();
+        return new BadRequestObjectResult(new
+        {
+            Status = 400,
+            Message = "Validation failed.",
+            Errors = errors
+        });
+    };
+}); ;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
