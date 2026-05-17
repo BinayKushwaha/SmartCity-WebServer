@@ -28,7 +28,11 @@ namespace SmartCity.Infrastructure
 
         public async Task<IEnumerable<RetailProperty>> GetPropertiesAsync()
         {
-            return await _context.Properties.AsNoTracking().ToListAsync();
+            return await _context.Properties.AsNoTracking()
+                .Include(x => x.CommissionRate)
+                .Include(x => x.Broker)
+                .OrderByDescending(x => x.CreatedAt)
+                .ToListAsync();
         }
 
         public async Task<RetailProperty> UpdateProperty(RetailProperty property)
@@ -38,7 +42,10 @@ namespace SmartCity.Infrastructure
             existingProperty.Features = property.Features;
             existingProperty.Location = property.Location;
             existingProperty.Type = property.Type;
-
+            existingProperty.CommissionRateId = property.CommissionRateId;
+            existingProperty.BrokerId = property.BrokerId;
+            existingProperty.UpdatedAt = DateTime.UtcNow;
+            existingProperty.CommissionAmount= property.CommissionAmount;
             _context.Properties.Update(existingProperty);
             await _context.SaveChangesAsync();
             return property;

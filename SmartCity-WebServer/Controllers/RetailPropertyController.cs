@@ -19,7 +19,7 @@ namespace SmartCity_WebServer.Controllers
 
         [HttpPost("Create")]
         [Authorize(Roles = "Broker")]
-        public async Task<IActionResult> Create([FromBody] RetailPropertyDto retailProperty)
+        public async Task<IActionResult> Create([FromBody] RetailPropertyRequestDto retailProperty)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -30,7 +30,7 @@ namespace SmartCity_WebServer.Controllers
 
         [HttpPut("Update/{id:int}")]
         [Authorize(Roles = "Broker")]
-        public async Task<IActionResult> Update(int id, [FromBody] RetailPropertyDto retailProperty)
+        public async Task<IActionResult> Update(int id, [FromBody] RetailPropertyRequestDto retailProperty)
         {
             if (id <= 0)
                 return BadRequest("Invalid property ID.");

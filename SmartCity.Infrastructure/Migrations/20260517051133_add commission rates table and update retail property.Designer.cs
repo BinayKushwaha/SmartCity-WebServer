@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartCity.Infrastructure;
 
@@ -11,9 +12,11 @@ using SmartCity.Infrastructure;
 namespace SmartCity.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260517051133_add commission rates table and update retail property")]
+    partial class addcommissionratestableandupdateretailproperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,38 +280,6 @@ namespace SmartCity.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CommissionRates", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            Label = "Below 50 Lakhs",
-                            MaxPrice = 4999999m,
-                            MinPrice = 0m,
-                            RatePercentage = 2.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            Label = "50 Lakhs to 1 Crore",
-                            MaxPrice = 10000000m,
-                            MinPrice = 5000000m,
-                            RatePercentage = 1.75m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            Label = "Above 1 Crore",
-                            MaxPrice = 9999999999m,
-                            MinPrice = 10000001m,
-                            RatePercentage = 1.50m
-                        });
                 });
 
             modelBuilder.Entity("SmartCity.Domain.RetailProperty", b =>
