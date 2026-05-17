@@ -17,7 +17,7 @@ namespace SmartCity.Infrastructure
             x => x.MigrationsAssembly("SmartCity.Infrastructure")));
 
             services.AddScoped<IRetailPropertyRepository, RetailPropertyRepository>();
-
+            services.AddScoped<ICommissionRateRepository, CommissionRateRepository>();
             return services;
         }
     }

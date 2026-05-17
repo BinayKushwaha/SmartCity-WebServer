@@ -17,6 +17,8 @@ builder.Services.AddScoped<IRetailPropertyService, RetailPropertyService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<ICommissionService, CommissionService>();
+
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
