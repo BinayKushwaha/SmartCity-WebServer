@@ -47,7 +47,9 @@ namespace SmartCity.Infrastructure
                     UserName = "brooker@smartcity.com",
                     FullName="Jane William",
                     EmailConfirmed=true,
-                    Email= "brooker@smartcity.com"
+                    Email= "brooker@smartcity.com",
+                    PhoneNumber = "9840017309"
+
                 };
 
                 var result = await _userManager.CreateAsync(broker, "Broker@123");
@@ -64,7 +66,8 @@ namespace SmartCity.Infrastructure
                     UserName = "seeker@smartcity.com",
                     Email = "seeker@smartcity.com",
                     FullName = "John Smith",
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "9803467430"
                 };
 
                 var result = await _userManager.CreateAsync(seeker, "Seeker@123");
