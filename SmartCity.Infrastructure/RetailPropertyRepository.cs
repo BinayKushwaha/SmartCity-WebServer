@@ -1,6 +1,6 @@
-﻿using SmartCity.Application;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartCity.Application;
 using SmartCity.Domain;
-using System.Data.Entity;
 
 namespace SmartCity.Infrastructure
 {

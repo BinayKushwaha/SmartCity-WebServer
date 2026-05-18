@@ -51,12 +51,19 @@ namespace SmartCity_WebServer.Controllers
         [Authorize(Roles = "Broker,HouseSeeker")]
         public async Task<IActionResult> GetProperties()
         {
-            var result = await _retailPropertyService.GetRetailProperties();
+            try
+            {
+                var result = await _retailPropertyService.GetRetailProperties();
 
-            if (result == null || !result.Any())
-                return NotFound("No properties found.");
+                if (result == null || !result.Any())
+                    return NotFound("No properties found.");
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, "Internal error occured.");
+            }
         }
 
         [HttpDelete("Delete/{id:int}")]

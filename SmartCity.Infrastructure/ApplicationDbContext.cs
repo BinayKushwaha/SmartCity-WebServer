@@ -44,6 +44,11 @@ namespace SmartCity.Infrastructure
                       .WithMany()
                       .HasForeignKey(p => p.BrokerId)
                       .OnDelete(DeleteBehavior.Restrict);
+
+                entity.Property(x => x.Type)
+                .HasConversion<string>()
+                .IsRequired()
+                .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole>(entity =>

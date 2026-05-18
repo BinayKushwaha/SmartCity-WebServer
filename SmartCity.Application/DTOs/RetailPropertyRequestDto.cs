@@ -7,8 +7,9 @@ namespace SmartCity.Application.DTOs
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Type is required.")]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Retail property type is required.")]
+        [EnumDataType(typeof(PropertyType),   
+        ErrorMessage = "Invalid property type.")]
         public PropertyType Type { get; set; }
 
         [Required(ErrorMessage = "Location is required.")]

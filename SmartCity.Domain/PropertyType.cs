@@ -1,5 +1,8 @@
-﻿namespace SmartCity.Domain
+﻿using System.Text.Json.Serialization;
+
+namespace SmartCity.Domain
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum PropertyType
     {
         Residential = 1,
