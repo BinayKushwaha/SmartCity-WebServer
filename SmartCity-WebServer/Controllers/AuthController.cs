@@ -35,7 +35,7 @@ namespace SmartCity_WebServer.Controllers
             if (!result.Succeeded) return Unauthorized("Invalid credentials");
 
             var token = await _tokenService.CreateTokenAsync(user);
-            return Ok(new AuthResponseDto(token, user.Email!, user.Id));
+            return Ok(new AuthResponseDto(token, user.Email!, user.FullName, user.Id));
         }
     }
 }

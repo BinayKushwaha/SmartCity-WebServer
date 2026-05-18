@@ -131,7 +131,7 @@ namespace SmartCity.Application
                     CommissionAmount = commission.CommissionAmount,
                     CommissionLabel = commission.SlabLabel,
                     CommissionRate = commission.RatePercentage,
-
+                    BrokerPhoneNumber= x.Broker?.PhoneNumber ?? string.Empty,
                     BrokerId = x.BrokerId,
                 };
             });

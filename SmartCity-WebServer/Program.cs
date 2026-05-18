@@ -78,11 +78,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowApp", policy =>
+    options.AddPolicy("SmartCityPolicy", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy
+            .WithOrigins(
+                "http://localhost:3000",  
+                "https://localhost:3000"   
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();           
     });
 });
 var app = builder.Build();
@@ -99,9 +104,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("SmartCityPolicy");
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

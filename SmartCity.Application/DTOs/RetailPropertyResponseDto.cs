@@ -27,6 +27,7 @@ namespace SmartCity.Application.DTOs
         public decimal CommissionRate { get; set; }   
         public decimal? CommissionAmount { get; set; }
         public string? BrokerId { get; set; }
+        public string BrokerPhoneNumber { get; set; } = string.Empty;
         public DateTime? UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
 
